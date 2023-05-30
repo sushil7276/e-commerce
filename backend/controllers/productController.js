@@ -8,6 +8,8 @@ const ApiFeatures = require('../utils/aoiFeatures');
 // create product ---> Admin
 exports.createProduct = catchAsyncError(async (req, res, next) => {
 
+    req.body.user = req.user.id;
+
     const product = await Product.create(req.body)
         .then((product) => {
             res.status(201).json({
