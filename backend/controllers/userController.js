@@ -5,6 +5,7 @@ const sendToken = require('../utils/jwtToken');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const sendEmail = require("../utils/sendEmail.js");
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 
 
@@ -231,5 +232,47 @@ exports.getSingleUser = catchAsyncError(async (req, res, next) => {
     res.status(200).json({
         success: true,
         user,
+    })
+})
+
+
+// Update User Profile (admin)
+exports.adminUpdateUserProfile = catchAsyncError(async (req, res, next) => {
+
+    const pass = await bcrypt.hash(req.body.password, 10)
+
+
+    const newUser = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+        password: pass
+    }
+
+    // We will add later
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUser, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+
+    res.status(200).json({
+        success: true
+    })
+})
+
+// Delete User Profile (admin)
+exports.adminDeleteUserProfile = catchAsyncError(async (req, res, next) => {
+
+    const user = await User.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+        return next(new ErrorHandler(`User does not exist with id ${req.params.id}`))
+    }
+
+    res.status(200).json({
+        success: true,
+        message: "Deleted Successfully"
     })
 })
