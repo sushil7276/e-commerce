@@ -102,6 +102,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
             message: `Email sent to ${user.email} successfully`,
         });
 
+
     } catch (error) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
@@ -118,12 +119,16 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
     // creating token hash
-    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+    const resetPasswordToken = crypto
+        .createHash("sha256")
+        .update(req.params.token)
+        .digest("hex");
 
     const user = await User.findOne({
         resetPasswordToken,
-        resetPasswordExpire: { $get: Date.now() }
-    })
+        resetPasswordExpire: { $gt: Date.now() },
+    });
+
 
     if (!user) {
         return next(new ErrorHandler("Reset Password Token is invalid or has been expired", 400));
