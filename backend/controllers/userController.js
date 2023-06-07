@@ -50,12 +50,12 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
     }
 
     const isPasswordMatched = await user.comparePassword(password);
-    
+
     if (!isPasswordMatched) {
 
         return next(new ErrorHandler("Invalid Email or password", 401))
     }
-    
+
     sendToken(user, 200, res);
 
 })
@@ -184,4 +184,26 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
     await user.save();
 
     sendToken(user, 200, res);
+})
+
+
+// Update User Profile
+exports.updateUserProfile = catchAsyncError(async (req, res, next) => {
+
+    const newUser = {
+        name: req.body.name,
+        email: req.body.email,
+    }
+
+    // We will add later
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUser, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+
+    res.status(200).json({
+        success: true
+    })
 })
