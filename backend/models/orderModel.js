@@ -29,7 +29,7 @@ const orderSchema = mongoose.Schema({
         }
     },
 
-    oderInfo: [
+    orderInfo: [
         {
             name: {
                 type: String,
@@ -101,7 +101,7 @@ const orderSchema = mongoose.Schema({
         default: 0,
     },
 
-    oderStatus: {
+    orderStatus: {
         type: String,
         required: true,
         default: "Processing"
