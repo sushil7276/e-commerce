@@ -8,7 +8,7 @@ const catchAsyncError = require('../middleware/catchAsyncErrors');
 exports.newOrder = catchAsyncError(async (req, res, next) => {
     const {
         shippingInfo,
-        oderInfo,
+        orderInfo,
         paymentInfo,
         itemsPrice,
         taxPrice,
@@ -18,7 +18,7 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
 
     const order = await Order.create({
         shippingInfo,
-        oderInfo,
+        orderInfo,
         paymentInfo,
         itemsPrice,
         taxPrice,
@@ -78,8 +78,13 @@ exports.getAllOrders = catchAsyncError(async (req, res, next) => {
 
 
 // Update Order status --- Admin
-exports.getAllOrders = catchAsyncError(async (req, res, next) => {
+exports.updateOrder = catchAsyncError(async (req, res, next) => {
     const order = await Order.findById(req.params.id);
+
+    if (!order) {
+        return next(new ErrorHandler("Order not found with this Id", 404));
+    }
+
 
     if (order.orderStatus === "Delivered") {
         return next(new ErrorHandler("You have already delivered this order", 400))
@@ -89,7 +94,8 @@ exports.getAllOrders = catchAsyncError(async (req, res, next) => {
         await updateStock(order.product, order.quantity);
     });
 
-    order.orderStatus == req.body.status;
+
+    order.orderStatus = req.body.status;
 
     if (req.body.status === "Delivered") {
         order.deliveredAt = Date.now();
@@ -99,8 +105,7 @@ exports.getAllOrders = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        totalAmount,
-        orders,
+        order,
     })
 });
 
@@ -110,5 +115,22 @@ async function updateStock(id, quantity) {
 
     product.stock -= quantity;
 
+    console.log(product.stock)
     await product.save({ validateBeforeSave: false });
 }
+
+
+
+// delete Order --- Admin
+exports.deleteOrder = catchAsyncError(async (req, res, next) => {
+    const order = await Order.findByIdAndDelete(req.params.id);
+
+
+    if (!order) {
+        return next(new ErrorHandler("Order not found with this Id", 404));
+    }
+
+    res.status(200).json({
+        success: true,
+    })
+});
