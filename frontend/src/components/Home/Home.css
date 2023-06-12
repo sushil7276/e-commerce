@@ -42,7 +42,8 @@
     position: absolute;
     top: 0%;
     left: 0;
-    clip-path: polygon(100% 68%, 0% 100%, 100% 100%);
+    /* this code generating to clip path css */
+    clip-path: polygon(100% 68%, 0% 100%, 100% 100%);    
     max-width: 100%;
 }
 
