@@ -1,0 +1,104 @@
+h1 {
+    font-family: 'Roboto';
+}
+
+h4 {
+    font-family: "Roboto";
+}
+
+p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Styling for the footer */
+#footer {
+    background-color: rgb(34, 33, 33);
+    color: white;
+    padding: 2vmax;
+    margin-top: 10vmax;
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the left section of the footer */
+.leftFooter {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leftFooter>h4{
+    font-size: 1vmax;
+}
+
+.leftFooter>p {
+    text-align: center;
+    font-size: 1.2vmax;
+}
+
+.leftFooter>img {
+    width: 10vmax;
+    margin: 1vmax;
+    cursor: pointer;
+}
+
+/* Styling for the middle section of the footer */
+.midFooter {
+    width: 60%;
+    text-align: center;
+}
+
+.midFooter>h1 {
+    font-size: 4vmax;
+    color: #eb4034;
+}
+
+.midFooter>p {
+    max-width: 60%;
+    margin: 1vmax auto;
+}
+
+
+/* Styling for the right section of the footer */
+.rightFooter {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rightFooter>h4 {
+    font-size: 1.4vmax;
+    text-decoration: underline;
+}
+
+.rightFooter>a {
+    color: white;
+    margin-bottom: 5px;
+    font-size: 1.3vmax;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0.5vmax;
+    transition: color 0.3s ease-in-out;
+}
+
+.rightFooter a:hover {
+    color: #ff6600;
+    /* Change to desired hover color */
+}
+
+/* Animation for the footer */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#footer {
+    animation: fadeIn 1s ease-in-out;
+}

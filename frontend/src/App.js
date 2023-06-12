@@ -1,8 +1,11 @@
 import './App.css';
-import { BrowserRouter as Router } from "react-router-dom"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import Header from './components/layout/Header/Header';
 import WebFont from 'webfontloader';
 import { useEffect } from 'react';
+import Footer from './components/layout/footer/Footer';
+import Home from './components/layout/Home/Home';
+
 
 
 
@@ -19,6 +22,10 @@ function App() {
 
       <Router>
         <Header />
+        <Routes>
+          <Route path='/' exact element={<Home />} />
+        </Routes>
+        <Footer />
       </Router>
     </div>
   );
