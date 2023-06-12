@@ -21,7 +21,7 @@ const Footer = () => {
 
             <div className='rightFooter'>
                 <h4>Follow Us</h4>
-                <a href='https://www.instagram.com/sushilbabar72/'>Instagram</a>
+                <a href='https://instagram.com/sushilbabar72?igshid=ZGUzMzM3NWJiOQ=='>Instagram</a>
                 <a href='https://www.linkedin.com/in/sushil-babar-3a6618237/'>LinkedIn</a>
                 <a href='https://www.facebook.com/sushil.babar.58'>Facebook</a>
             </div>
