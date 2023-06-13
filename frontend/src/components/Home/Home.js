@@ -16,13 +16,14 @@ const Home = () => {
     const { loading, products, error } = useSelector(state => state.products);
 
     useEffect(() => {
+
         if (error) {
             alter.error(error)
             dispatch(clearErrors())
         }
 
-
         dispatch(getProduct());
+
     }, [dispatch, error, alter])
 
     return (

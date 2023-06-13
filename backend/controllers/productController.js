@@ -41,7 +41,7 @@ exports.getAllProduct = catchAsyncError(async (req, res, next) => {
 // Get Product Details
 exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 
-    const product = await Product.findById(req.params.id)
+    await Product.findById(req.params.id)
         .then((product) => {
             res.status(201).json({
                 success: true,
@@ -51,9 +51,6 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
         .catch(() => {
             next(new ErrorHandler("Product not found", 404))
         });
-
-
-
 })
 
 // Update Product ----> Admin
