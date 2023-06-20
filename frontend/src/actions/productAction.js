@@ -3,12 +3,16 @@ import { ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, CLEAR_ERROR
 
 const url = "http://localhost:4000"
 
-export const getProduct = (keyword = "", currentPage = 1, price = [0, 85000]) => async (dispatch) => {
+export const getProduct = (keyword = "", currentPage = 1, price = [0, 85000], category, ratings = 0) => async (dispatch) => {
     try {
 
         dispatch({ type: ALL_PRODUCT_REQUEST });
 
-        let link = `${url}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
+        let link = `${url}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+
+        if (category) {
+            link = `${url}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+        }
 
         const { data } = await axios.get(link);
 

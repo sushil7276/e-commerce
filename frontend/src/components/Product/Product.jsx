@@ -11,6 +11,18 @@ import { useAlert } from "react-alert";
 import Typography from '@material-ui/core/Typography';
 
 
+const categories = [
+  "Laptop",
+  "Footwear",
+  "Bottom",
+  "Tops",
+  "Attire",
+  "Camera",
+  "SmartPhones",
+  "mobile"
+];
+
+
 const Product = () => {
   const { keyword } = useParams()
 
@@ -20,8 +32,10 @@ const Product = () => {
   // current page state
   const [currentPage, setCurrentPage] = useState(1);
 
-  // default price range
+  // filter state
   const [price, setPrice] = useState([0, 85000]);
+  const [category, setCategory] = useState("");
+  const [ratings, setRatings] = useState(0);
 
 
   const {
@@ -33,6 +47,7 @@ const Product = () => {
     // filteredProductsCount,
   } = useSelector(state => state.products)
 
+  // set current page no
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   }
@@ -51,8 +66,8 @@ const Product = () => {
       dispatch(clearErrors())
     }
 
-    dispatch(getProduct(keyword, currentPage, price))
-  }, [dispatch, alert, error, keyword, currentPage, price])
+    dispatch(getProduct(keyword, currentPage, price, category, ratings))
+  }, [dispatch, alert, error, keyword, currentPage, price, category, ratings])
 
 
 
@@ -68,15 +83,48 @@ const Product = () => {
           </div>
 
           <div className='filterBox'>
-            <Typography>Price</Typography>
-            <Slider
-              value={price}
-              onChange={priceHandler}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              min={0}
-              max={85000}
-            />
+
+            {/* Price Field Set */}
+            <fieldset>
+              <Typography component="legend">Price</Typography>
+              <Slider
+                value={price}
+                onChange={priceHandler}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={0}
+                max={85000}
+              />
+            </fieldset>
+
+            {/* Categories Field Set */}
+            <fieldset>
+              <Typography component="legend">Categories</Typography>
+              <ul className='categoryBox'>
+                {categories.map((category) => (
+                  <li
+                    className='category-link'
+                    key={category}
+                    onClick={() => setCategory(category)}
+                  >{category}</li>
+                ))}
+              </ul>
+            </fieldset>
+
+            {/* Rating Field Set */}
+            <fieldset>
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
+                value={ratings}
+                onChange={(e, newRating) => {
+                  setRatings(newRating);
+                }}
+                aria-labelledby="continuous-slider"
+                valueLabelDisplay="auto"
+                min={0}
+                max={5}
+              />
+            </fieldset>
           </div>
 
           {resultPerPage < productCount && (
