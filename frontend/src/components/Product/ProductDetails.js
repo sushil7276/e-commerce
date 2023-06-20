@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import ReactStars from 'react-rating-stars-component';
 import ReviewCard from './ReviewCard';
 import Loader from '../layout/Loader/Loader';
+import MetaData from '../layout/MetaData';
 
 
 function ProductDetails() {
@@ -48,7 +49,9 @@ function ProductDetails() {
     return (
         <>
             {loading ? (<Loader />) :
-                (<>
+                (
+                <>
+                <MetaData title={`${product.name} -- ECOMMERCE`}  />
                     <div className="ProductDetails">
                         <div>
                             <Carousel>
