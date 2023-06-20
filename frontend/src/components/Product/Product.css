@@ -45,7 +45,7 @@
     border-radius: 0 5px 5px 0;
 }
 
-.page-link{
+.page-link {
     text-decoration: none;
     font: 300 0.7vmax "Roboto";
     color: rgb(80, 80, 80);
@@ -54,17 +54,31 @@
 
 .page-item:hover {
     background-color: rgb(230, 230, 230);
-  }
-  
-  .page-item:hover .page-link {
-    color: rgb(0, 0, 0);
-  }
-  
-  .pageItemActive {
-    background-color: tomato;
-  }
-  
-  .pageLinkActive {
-    color: white;
-  }
+}
 
+.page-item:hover .page-link {
+    color: rgb(0, 0, 0);
+}
+
+.pageItemActive {
+    background-color: tomato;
+}
+
+.pageLinkActive {
+    color: white;
+}
+
+.filterBox {
+    width: 10vmax;
+    position: absolute;
+    top: 10vmax;
+    left: 4vmax;
+}
+
+@media screen and (max-width:600px) {
+    .filterBox {
+        width: 20vmax;
+        position: static;
+        margin: auto;
+    }
+}
