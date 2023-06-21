@@ -39,6 +39,9 @@ import {
 import axios from "axios";
 
 
+const url = process.env.REACT_APP_URL;
+
+
 // Login
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -48,7 +51,7 @@ export const login = (email, password) => async (dispatch) => {
         const config = { headers: { "Content-Type": "application/json" } };
 
         const { data } = await axios.post(`
-        /api/v1/login`,
+        ${url}/api/v1/login`,
             { email, password },
             { headers: { "Content-Type": "application/json" } }
         );

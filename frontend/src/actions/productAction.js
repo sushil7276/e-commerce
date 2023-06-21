@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, CLEAR_ERRORS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS } from "../constant/productConstant"
 
-const url = "http://localhost:4000"
+const url = process.env.REACT_APP_URL
 
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 85000], category, ratings = 0) => async (dispatch) => {
     try {
