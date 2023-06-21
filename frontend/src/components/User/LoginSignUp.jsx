@@ -54,7 +54,8 @@ function LoginSignUp() {
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
-        console.log("SignUp form submitted");
+        
+        dispatch(register(myForm));
     }
 
     const registerDataChange = (e) => {
@@ -142,7 +143,7 @@ function LoginSignUp() {
                                         value={loginEmail}
                                         onChange={(e) => setLoginEmail(e.target.value)} />
                                 </div>
-                                
+
                                 <div className="loginPassword">
                                     <LockOpenIcon />
                                     <input
