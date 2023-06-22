@@ -13,13 +13,14 @@ import store from './store';
 import { loadUser } from './actions/userAction';
 import UserOptions from './components/layout/Header/UserOptions';
 import { useSelector } from 'react-redux';
+import Profile from './components/User/Profile';
 
 
 function App() {
 
   const { isAuthenticated, user } = useSelector(state => state.user)
 
- 
+
   useEffect(() => {
     WebFont.load({
       google: {
@@ -29,8 +30,6 @@ function App() {
 
     // login user details store
     store.dispatch(loadUser());
-
-
 
   }, []);
 
@@ -49,6 +48,7 @@ function App() {
           <Route path='/products/:keyword' element={<Product />} />
           <Route path='/search' element={<Search />} />
           <Route path='/login' element={<LoginSignUp />} />
+          <Route path='/account' element={<Profile user={user} />} />
 
         </Routes>
         <Footer />
