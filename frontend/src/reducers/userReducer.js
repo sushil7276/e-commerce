@@ -10,10 +10,10 @@ import {
     LOAD_USER_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
-    // UPDATE_PROFILE_REQUEST,
-    // UPDATE_PROFILE_SUCCESS,
-    // UPDATE_PROFILE_FAIL,
-    // UPDATE_PROFILE_RESET,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAIL,
+    UPDATE_PROFILE_RESET,
     // UPDATE_PASSWORD_REQUEST,
     // UPDATE_PASSWORD_SUCCESS,
     // UPDATE_PASSWORD_RESET,
@@ -96,6 +96,42 @@ export const userReducer = (state = { user: {} }, action) => {
                 loading: false,
                 error: action.payload,
             }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+}
+
+export const profileReducer = (state = { }, action) => {
+    switch (action.type) {
+        case UPDATE_PROFILE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case UPDATE_PROFILE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                user: action.payload,
+            };
+
+        case UPDATE_PROFILE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: false,
+                user: null,
+                error: action.payload,
+            };
 
         case CLEAR_ERRORS:
             return {
