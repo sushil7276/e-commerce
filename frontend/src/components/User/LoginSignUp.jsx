@@ -86,7 +86,7 @@ function LoginSignUp() {
 
     useEffect(() => {
 
-        if (isAuthenticated === true) {
+        if (isAuthenticated) {
             navigate("/account");
         }
 
