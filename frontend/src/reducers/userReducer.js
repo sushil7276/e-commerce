@@ -108,7 +108,7 @@ export const userReducer = (state = { user: {} }, action) => {
     }
 }
 
-export const profileReducer = (state = { }, action) => {
+export const profileReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_PROFILE_REQUEST:
             return {
@@ -120,18 +120,21 @@ export const profileReducer = (state = { }, action) => {
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: true,
-                user: action.payload,
+                isUpdated: action.payload,
             };
 
         case UPDATE_PROFILE_FAIL:
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: false,
-                user: null,
                 error: action.payload,
             };
+
+        case UPDATE_PROFILE_RESET:
+            return {
+                ...state,
+                isUpdated: false
+            }
 
         case CLEAR_ERRORS:
             return {

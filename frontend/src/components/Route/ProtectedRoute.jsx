@@ -32,7 +32,7 @@ export default ProtectedRoute
 
 // This is new version of protected route in react dom V6
 function ProtectedRoute({ children }) {
-    const { isAuthenticated, user } = useSelector(state => state.user);
+    const { isAuthenticated } = useSelector(state => state.user);
 
     if (!isAuthenticated) {
         return <Navigate to="/login" replace />
