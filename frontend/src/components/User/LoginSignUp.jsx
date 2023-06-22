@@ -36,16 +36,17 @@ function LoginSignUp() {
 
     const { name, email, password } = user;
 
-    const [avatar, setAvatar] = useState("/Profile.png");
+    const [avatar, setAvatar] = useState();
     const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
 
-
+    // Login Event Handle
     const loginSubmit = (e) => {
         e.preventDefault();
         dispatch(login(loginEmail, loginPassword))
     }
 
+    // Register Event Handle
     const registerSubmit = (e) => {
         e.preventDefault();
 
@@ -85,14 +86,15 @@ function LoginSignUp() {
     }
 
     useEffect(() => {
-
-        if (isAuthenticated) {
-            navigate("/account");
-        }
-
+    
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
+        }
+
+
+        if (isAuthenticated) {
+            navigate("/account");
         }
 
 
