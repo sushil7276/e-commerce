@@ -54,7 +54,6 @@ export const userReducer = (state = { user: {} }, action) => {
                 loading: true,
                 isAuthenticated: false,
             };
-
         case LOGIN_SUCCESS:
         case REGISTER_USER_SUCCESS:
         case LOAD_USER_SUCCESS:
@@ -71,7 +70,6 @@ export const userReducer = (state = { user: {} }, action) => {
                 user: null,
                 isAuthenticated: false,
             };
-
         case LOGIN_FAIL:
         case REGISTER_USER_FAIL:
             return {
@@ -95,7 +93,7 @@ export const userReducer = (state = { user: {} }, action) => {
                 ...state,
                 loading: false,
                 error: action.payload,
-            }
+            };
 
         case CLEAR_ERRORS:
             return {
@@ -106,7 +104,7 @@ export const userReducer = (state = { user: {} }, action) => {
         default:
             return state;
     }
-}
+};
 
 export const profileReducer = (state = {}, action) => {
     switch (action.type) {
@@ -129,7 +127,7 @@ export const profileReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload,
             };
-            
+
         case UPDATE_PROFILE_RESET:
             return {
                 ...state,
