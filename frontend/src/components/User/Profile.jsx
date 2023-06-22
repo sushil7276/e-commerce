@@ -13,7 +13,7 @@ function Profile() {
 
     useEffect(() => {
 
-        if (isAuthenticated === false || user === null) {
+        if (isAuthenticated === false) {
             navigate('/login');
         }
 
