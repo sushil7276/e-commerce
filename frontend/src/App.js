@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from './components/layout/Header/Header';
 import WebFont from 'webfontloader';
 import { useEffect } from 'react';
@@ -9,16 +9,26 @@ import ProductDetails from './components/Product/ProductDetails';
 import Product from './components/Product/Product';
 import Search from './components/Product/Search';
 import LoginSignUp from './components/User/LoginSignUp';
+import store from './store';
+import { loadUser } from './actions/userAction';
 
 
 function App() {
+
   useEffect(() => {
     WebFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"]
       }
-    })
-  }, [])
+    });
+
+    // login user details store
+    store.dispatch(loadUser());
+
+  }, []);
+
+
+
   return (
     <div className="App">
 

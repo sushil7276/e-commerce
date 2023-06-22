@@ -5,9 +5,9 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
-    // LOAD_USER_REQUEST,
-    // LOAD_USER_SUCCESS,
-    // LOAD_USER_FAIL,
+    LOAD_USER_REQUEST,
+    LOAD_USER_SUCCESS,
+    LOAD_USER_FAIL,
     // LOGOUT_SUCCESS,
     // LOGOUT_FAIL,
     // UPDATE_PROFILE_REQUEST,
@@ -85,8 +85,27 @@ export const register = (userData) => async (dispatch) => {
     } catch (error) {
         dispatch({ type: REGISTER_USER_FAIL, payload: error.response.data.message })
     }
-}
+};
 
+
+// Load User
+export const loadUser = () => async (dispatch) => {
+    try {
+
+        dispatch({ type: LOAD_USER_REQUEST });
+
+
+        const { data } = await axios.get(`
+        ${url}/api/v1/me`,
+        );
+
+        dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+
+
+    } catch (error) {
+        dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message })
+    }
+}
 
 
 // Clearing Errors
