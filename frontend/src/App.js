@@ -50,7 +50,7 @@ function App() {
           <Route path='/search' element={<Search />} />
           <Route path='/login' element={<LoginSignUp />} />
 
-          <Route path='/account' element={<ProtectedRoute><Profile user={user} /></ProtectedRoute>} />
+          <Route path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
         </Routes>
         <Footer />
