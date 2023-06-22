@@ -14,7 +14,7 @@ function LoginSignUp() {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const navigate = useNavigate();
+    let navigate = useNavigate();
 
     const { error, loading, isAuthenticated } = useSelector((state) => state.user);
 
@@ -54,7 +54,7 @@ function LoginSignUp() {
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
-        
+
         dispatch(register(myForm));
     }
 
@@ -86,13 +86,13 @@ function LoginSignUp() {
 
     useEffect(() => {
 
+        if (isAuthenticated) {
+            navigate("/account");
+        }
+
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
-        }
-
-        if (isAuthenticated) {
-            navigate("/account");
         }
 
 

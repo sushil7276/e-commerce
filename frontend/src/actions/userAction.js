@@ -8,8 +8,8 @@ import {
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
-    // LOGOUT_SUCCESS,
-    // LOGOUT_FAIL,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAIL,
     // UPDATE_PROFILE_REQUEST,
     // UPDATE_PROFILE_SUCCESS,
     // UPDATE_PROFILE_FAIL,
@@ -79,8 +79,8 @@ export const register = (userData) => async (dispatch) => {
             config
         );
 
-        dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
 
+        dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
 
     } catch (error) {
         dispatch({ type: REGISTER_USER_FAIL, payload: error.response.data.message })
@@ -104,6 +104,23 @@ export const loadUser = () => async (dispatch) => {
 
     } catch (error) {
         dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message })
+    }
+}
+
+
+// Logout User
+export const logout = () => async (dispatch) => {
+    try {
+
+        const { data } = await axios.get(`
+        ${url}/api/v1/logout`,
+        );
+
+        dispatch({ type: LOGOUT_SUCCESS, payload: data.user });
+
+
+    } catch (error) {
+        dispatch({ type: LOGOUT_FAIL })
     }
 }
 
