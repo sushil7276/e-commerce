@@ -51,6 +51,8 @@ function App() {
           <Route path='/login' element={<LoginSignUp />} />
 
           <Route path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          {/* <Route path='/me/update' element={<ProtectedRoute><Profile /></ProtectedRoute>} /> */}
+       
 
         </Routes>
         <Footer />
