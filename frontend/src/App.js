@@ -18,6 +18,7 @@ import ProtectedRoute from "./components/Route/ProtectedRoute";
 import UpdateProfile from './components/User/UpdateProfile';
 
 
+
 function App() {
 
   const { isAuthenticated, user } = useSelector(state => state.user)
@@ -30,6 +31,7 @@ function App() {
       }
     });
 
+    
     // login user details store
     store.dispatch(loadUser());
 
