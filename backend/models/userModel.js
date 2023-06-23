@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "please Enter your Password"],
-        minLength: [8, "Password should be greater than 8 characters"],
+        // minLength: [8, "Password should be greater than 8 characters"],
         select: false,      // "select" means = if you use find() the password filed not show
     },
 
