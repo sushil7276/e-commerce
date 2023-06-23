@@ -17,6 +17,8 @@ import Profile from './components/User/Profile';
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import UpdateProfile from './components/User/UpdateProfile';
 import UpdatePassword from './components/User/UpdatePassword';
+import ForgotPassword from './components/User/ForgotPassword';
+import ResetPassword from './components/User/ResetPassword';
 
 
 
@@ -32,7 +34,7 @@ function App() {
       }
     });
 
-    
+
     // login user details store
     store.dispatch(loadUser());
 
@@ -53,10 +55,15 @@ function App() {
           <Route path='/products/:keyword' element={<Product />} />
           <Route path='/search' element={<Search />} />
           <Route path='/login' element={<LoginSignUp />} />
+          <Route path='/password/forgot' element={<ForgotPassword />} />
+          <Route path='/password/reset/:token' element={<ResetPassword />} />
 
+
+          {/* PROTECTED ROUTE */}
           <Route path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path='/me/update' element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
           <Route path='/password/update' element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>} />
+
 
 
         </Routes>
