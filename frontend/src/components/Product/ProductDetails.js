@@ -9,11 +9,12 @@ import ReactStars from 'react-rating-stars-component';
 import ReviewCard from './ReviewCard';
 import Loader from '../layout/Loader/Loader';
 import MetaData from '../layout/MetaData';
+import { addItemsToCart } from "../../actions/cartAction"
 
 
 function ProductDetails() {
 
-    // this for get the id from url
+    // Get the id from URL
     const { id } = useParams();
 
     const alert = useAlert();
@@ -21,6 +22,7 @@ function ProductDetails() {
     const dispatch = useDispatch();
     const { product, loading, error } = useSelector(state => state.productDetailsReducer);
 
+    // This options for rating stars
     const options = {
         edit: false,
         color: "rgba(20,20,20,0.1)",
@@ -30,22 +32,30 @@ function ProductDetails() {
         isHalf: true
     }
 
+
+    // Quantity increase or decrease //
     const [quantity, setQuantity] = useState(1);
 
+    // increase   
     const increaseQuantity = () => {
-
         if (product.stock <= quantity) return;
         const qty = quantity + 1;
         setQuantity(qty);
-    }
+    };
 
+    //decrease
     const decreaseQuantity = () => {
-
         if (1 >= quantity) return;
         const qty = quantity - 1;
         setQuantity(qty);
 
-    }
+    };
+
+    // Add cart items
+    const addToCartHandler = () => {
+        dispatch(addItemsToCart(id, quantity));
+        alert.success("Item Added To Cart");
+    };
 
     useEffect(() => {
 
@@ -54,6 +64,7 @@ function ProductDetails() {
             dispatch(clearErrors());
         }
 
+        // We will get the product details
         dispatch(getProductDetails(id));
 
     }, [dispatch, id, error, alert]);
@@ -103,7 +114,8 @@ function ProductDetails() {
                                             <button onClick={increaseQuantity}>+</button>
                                         </div>
 
-                                        <button>Add to Cart</button>
+                                        {/* Add to cart */}
+                                        <button onClick={addToCartHandler}>Add to Cart</button>
                                     </div>
 
                                     <p>
