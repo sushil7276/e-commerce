@@ -28,44 +28,48 @@ function Cart() {
     }
 
     return (
-        <Fragment>
-            <div className="cartPage">
-                <div className="cartHeader">
-                    <p>Product</p>
-                    <p>Quantity</p>
-                    <p>Subtotal</p>
-                </div>
-                {cartItems && cartItems.map((item) => (
-
-                    <div className="cartContainer">
-                        <CartItemCard item={item} deleteCart={deleteCartItem} />
-
-                        {/* Quantity "+" OR "-" */}
-                        <div className="cartInput">
-                            <button onClick={() => decreaseQuantity(item.product, item.quantity)}>-</button>
-                            <input type="number" value={item.quantity} readOnly />
-                            <button onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>+</button>
+        <>
+            {cartItems.length === 0 ? "No Items in Cart" : (
+                <Fragment>
+                    <div className="cartPage">
+                        <div className="cartHeader">
+                            <p>Product</p>
+                            <p>Quantity</p>
+                            <p>Subtotal</p>
                         </div>
+                        {cartItems && cartItems.map((item) => (
 
-                        {/* Subtotal */}
-                        <p className="cartSubtotal">{`₹${item.price * item.quantity}`}</p>
-                    </div>
-                ))}
+                            <div className="cartContainer" key={item.product}>
+                                <CartItemCard item={item} deleteCart={deleteCartItem} />
 
-                {/* Gross Profit */}
-                <div className="cartGrossProfit">
-                    <div></div>
-                    <div className="cartGrossProfitBox">
-                        <p>Gross Profit</p>
-                        <p>₹{`600`}</p>
+                                {/* Quantity "+" OR "-" */}
+                                <div className="cartInput">
+                                    <button onClick={() => decreaseQuantity(item.product, item.quantity)}>-</button>
+                                    <input type="number" value={item.quantity} readOnly />
+                                    <button onClick={() => increaseQuantity(item.product, item.quantity, item.stock)}>+</button>
+                                </div>
+
+                                {/* Subtotal */}
+                                <p className="cartSubtotal">{`₹${item.price * item.quantity}`}</p>
+                            </div>
+                        ))}
+
+                        {/* Gross Profit */}
+                        <div className="cartGrossProfit">
+                            <div></div>
+                            <div className="cartGrossProfitBox">
+                                <p>Gross Profit</p>
+                                <p>₹{`600`}</p>
+                            </div>
+                            <div></div>
+                            <div className="checkOutBtn">
+                                <button>Check Out</button>
+                            </div>
+                        </div>
                     </div>
-                    <div></div>
-                    <div className="checkOutBtn">
-                        <button>Check Out</button>
-                    </div>
-                </div>
-            </div>
-        </Fragment>
+                </Fragment>
+            )}
+        </>
     )
 }
 
