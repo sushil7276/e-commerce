@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import "./LoginSignUp.css";
 import Loader from '../layout/Loader/Loader';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import FaceIcon from '@material-ui/icons/Face';
@@ -85,8 +85,17 @@ function LoginSignUp() {
         }
     }
 
+    // This code Use for React Router Dom V5
+    // const redirect = location.search ? location.search.split("=")[1] : "/account";
+
+    // This code Use for React Router Dom V6
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const redirect = queryParams.get('/account') || '/shipping';
+
+
     useEffect(() => {
-    
+
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
@@ -94,11 +103,11 @@ function LoginSignUp() {
 
 
         if (isAuthenticated) {
-            navigate("/account");
+            navigate(redirect);
         }
 
 
-    }, [dispatch, error, alert, navigate, isAuthenticated]);
+    }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
 
 
 

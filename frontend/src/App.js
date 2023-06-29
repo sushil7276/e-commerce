@@ -20,6 +20,7 @@ import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
 import Cart from './components/Cart/Cart';
+import Shipping from './components/Cart/Shipping';
 
 
 
@@ -58,14 +59,16 @@ function App() {
           <Route path='/login' element={<LoginSignUp />} />
           <Route path='/password/forgot' element={<ForgotPassword />} />
           <Route path='/password/reset/:token' element={<ResetPassword />} />
-
           {/* Cart */}
           <Route path='/cart' element={<Cart />} />
+
 
           {/* PROTECTED ROUTE */}
           <Route path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path='/me/update' element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
           <Route path='/password/update' element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>} />
+          {/* Shipping */}
+          <Route path='/shipping' element={<ProtectedRoute><Shipping /></ProtectedRoute>} />
 
 
 
