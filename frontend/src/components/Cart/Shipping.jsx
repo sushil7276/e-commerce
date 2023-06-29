@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import "./Shipping.css";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData";
@@ -8,7 +8,7 @@ import LocationCityIcon from "@material-ui/icons/LocationCity";
 import PublicIcon from "@material-ui/icons/Public";
 import PhoneIcon from "@material-ui/icons/Phone";
 import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
-import { Country, State } from "country-state-city"
+import { Country, State, City } from "country-state-city"
 import { useAlert } from "react-alert";
 import CheckoutSteps from "./CheckoutSteps";
 import { useNavigate } from "react-router-dom";
@@ -54,30 +54,6 @@ function Shipping() {
 
                     <form className="shippingForm" encType="multipart/form-data" onSubmit={shippingSubmit}>
 
-                        {/* Home Address */}
-                        <div>
-                            <HomeIcon />
-                            <input type="text" placeholder="Address" required value={address} onChange={(e) => setAddress(e.target.value)} />
-                        </div>
-
-                        {/* City */}
-                        <div>
-                            <LocationCityIcon />
-                            <input type="text" placeholder="City" required value={city} onChange={(e) => setCity(e.target.value)} />
-                        </div>
-
-                        {/* PinCode */}
-                        <div>
-                            <PinDropIcon />
-                            <input type="number" placeholder="Pin Code" required value={pinCode} onChange={(e) => setPinCode(e.target.value)} />
-                        </div>
-
-                        {/* Phone Number */}
-                        <div>
-                            <PhoneIcon />
-                            <input type="number" placeholder="Phone Number" required value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} />
-                        </div>
-
                         {/* Country */}
                         <div>
                             <PublicIcon />
@@ -101,6 +77,41 @@ function Shipping() {
                                 </select>
                             </div>
                         )}
+                        {/* City */}
+                        {state && (
+                            <div>
+                                <LocationCityIcon />
+                                <select required value={city} onChange={(e) => setCity(e.target.value)}>
+                                    <option value="">City</option>
+                                    {/* passing 2 arguments to the getCitiesOfState function (1.country code and 2. state code) */}
+                                    {City && City.getCitiesOfState(country, state).map((items) => (
+                                        <option value={items.name} key={items.name}>{items.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {/* Home Address */}
+                        <div>
+                            <HomeIcon />
+                            <input type="text" placeholder="Address" required value={address} onChange={(e) => setAddress(e.target.value)} />
+                        </div>
+
+
+
+                        {/* PinCode */}
+                        <div>
+                            <PinDropIcon />
+                            <input type="number" placeholder="Pin Code" required value={pinCode} onChange={(e) => setPinCode(e.target.value)} />
+                        </div>
+
+                        {/* Phone Number */}
+                        <div>
+                            <PhoneIcon />
+                            <input type="number" placeholder="Phone Number" required value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} />
+                        </div>
+
+
 
                         <input type="submit" value="Continue" className="shippingBtn" disabled={state ? false : true} />
 
