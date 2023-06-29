@@ -17,6 +17,7 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EventIcon from "@material-ui/icons/Event";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useNavigate } from "react-router-dom";
+import { clearErrors, createOrder } from "../../actions/orderAction";
 
 function Payment() {
 
@@ -31,10 +32,20 @@ function Payment() {
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart)
     const { user } = useSelector((state) => state.user)
-    // const { error } = useSelector((state) => state.newOrder)
+    const { error } = useSelector((state) => state.newOrder)
 
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100),
+    }
+
+    // order Data
+    const order = {
+        shippingInfo,
+        orderInfo: cartItems,
+        itemsPrice: orderInfo.subtotal,
+        taxPrice: orderInfo.tax,
+        shippingPrice: orderInfo.shippingCharges,
+        totalPrice: orderInfo.totalPrice,
     }
 
     const submitHandler = async (e) => {
@@ -77,6 +88,16 @@ function Payment() {
             }
             else {
                 if (result.paymentIntent.status === "succeeded") {
+
+                    // Create Payment object in order
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status,
+                    }
+
+                    // Create a new Order
+                    dispatch(createOrder(order));
+
                     navigate("/success")
                 }
                 else {
@@ -91,6 +112,14 @@ function Payment() {
         }
 
     }
+
+
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors())
+        }
+    }, [dispatch, error, alert])
 
     return (
         <Fragment>

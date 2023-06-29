@@ -26,6 +26,7 @@ import axios from 'axios';
 import Payment from './components/Cart/Payment';
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
+import OrderSuccess from './components/Cart/OrderSuccess';
 
 
 
@@ -66,6 +67,9 @@ function App() {
         <Header />
         {isAuthenticated && <UserOptions user={user} />}
         <Routes>
+
+          {/* ---------------------------------------------------------------------------------------------- */}
+          {/* Public Access Route */}
           <Route path='/' exact element={<Home />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/products' element={<Product />} />
@@ -74,22 +78,28 @@ function App() {
           <Route path='/login' element={<LoginSignUp />} />
           <Route path='/password/forgot' element={<ForgotPassword />} />
           <Route path='/password/reset/:token' element={<ResetPassword />} />
+
           {/* Cart */}
           <Route path='/cart' element={<Cart />} />
 
 
+          {/* ---------------------------------------------------------------------------------------------- */}
           {/* PROTECTED ROUTE */}
           <Route path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path='/me/update' element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
           <Route path='/password/update' element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>} />
+
           {/* Shipping */}
           <Route path='/shipping' element={<ProtectedRoute><Shipping /></ProtectedRoute>} />
           <Route path='/order/confirm' element={<ProtectedRoute><ConfirmOrder /></ProtectedRoute>} />
+
 
           {/* Payment Route */}
           {stripeApiKey && (
             <Route path='/process/payment' element={<ProtectedRoute><Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements></ProtectedRoute>} />
           )}
+          {/* After payment Order success Route */}
+          <Route path='/success' element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
 
 
 
