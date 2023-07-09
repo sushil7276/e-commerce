@@ -27,6 +27,7 @@ import Payment from './components/Cart/Payment';
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import OrderSuccess from './components/Cart/OrderSuccess';
+import MyOrders from './components/Order/MyOrders';
 
 
 
@@ -100,7 +101,10 @@ function App() {
           )}
           {/* After payment Order success Route */}
           <Route path='/success' element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
+          
 
+          {/* Order Route */}
+          <Route path='/orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
 
 
         </Routes>
