@@ -28,6 +28,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import OrderSuccess from './components/Cart/OrderSuccess';
 import MyOrders from './components/Order/MyOrders';
+import OrderDetails from './components/Order/OrderDetails';
 
 
 
@@ -101,10 +102,11 @@ function App() {
           )}
           {/* After payment Order success Route */}
           <Route path='/success' element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
-          
+
 
           {/* Order Route */}
           <Route path='/orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+          <Route path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute>} />
 
 
         </Routes>
