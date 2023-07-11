@@ -29,6 +29,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import OrderSuccess from './components/Cart/OrderSuccess';
 import MyOrders from './components/Order/MyOrders';
 import OrderDetails from './components/Order/OrderDetails';
+import Dashboard from './components/Admin/Dashboard';
 
 
 
@@ -108,6 +109,8 @@ function App() {
           <Route path='/orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
           <Route path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute>} />
 
+          {/* Admin Route */}
+          <Route path='/admin/dashboard' element={<ProtectedRoute><Dashboard isAdmin={true} /></ProtectedRoute>} />
 
         </Routes>
         <Footer />
