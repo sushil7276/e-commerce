@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from 'react-alert';
 import { clearErrors, getProductDetails, newReview } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';
-import ReactStars from 'react-rating-stars-component';
 import ReviewCard from './ReviewCard';
 import Loader from '../layout/Loader/Loader';
 import MetaData from '../layout/MetaData';
@@ -35,12 +34,10 @@ function ProductDetails() {
 
     // This options for rating stars
     const options = {
-        edit: false,
-        color: "rgba(20,20,20,0.1)",
-        activeColor: "tomato",
-        size: window.innerWidth < 600 ? 20 : 25,
+        size: "large",
         value: product.ratings,
-        isHalf: true
+        readOnly: true,
+        precision: 0.5,
     }
 
     // useState
@@ -131,7 +128,7 @@ function ProductDetails() {
                                     {product.images && product.images.map((item, i) => (
                                         <img
                                             className="CarouselImage"
-                                            key={item.url}
+                                            key={i}
                                             src={item.url}
                                             alt={`${i} Slide`}
                                         />
@@ -145,7 +142,7 @@ function ProductDetails() {
                                     <p>Product # {product._id}</p>
                                 </div>
                                 <div className='detailsBlock-2'>
-                                    <ReactStars {...options} />
+                                    <Rating {...options} />
                                     <span className='detailsBlock-2-span'>({product.numOfReviews} Reviews)</span>
                                 </div>
 
@@ -183,23 +180,25 @@ function ProductDetails() {
                         </div>
 
                         <h3 className="reviewsHeading">REVIEWS</h3>
+
                         <Dialog
-                            aria-labelledby='simple-dialog-title'
+                            aria-labelledby="simple-dialog-title"
                             open={open}
                             onClose={submitReviewToggle}
                         >
+
                             <DialogTitle>Submit Review</DialogTitle>
                             <DialogContent className='submitDialog'>
                                 <Rating
                                     onChange={(e) => setRating(e.target.value)}
                                     value={rating}
-                                    size='large'
+                                    size="large"
                                 />
 
                                 <textarea
-                                    className='submitDialogTextArea'
-                                    cols='30'
-                                    rows='5'
+                                    className="submitDialogTextArea"
+                                    cols="30"
+                                    rows="5"
                                     value={comment}
                                     onChange={(e) => setComment(e.target.value)}
                                 ></textarea>
