@@ -16,10 +16,10 @@ import {
     // UPDATE_PRODUCT_SUCCESS,
     // UPDATE_PRODUCT_FAIL,
     // UPDATE_PRODUCT_RESET,
-    // DELETE_PRODUCT_REQUEST,
-    // DELETE_PRODUCT_SUCCESS,
-    // DELETE_PRODUCT_FAIL,
-    // DELETE_PRODUCT_RESET,
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
+    DELETE_PRODUCT_RESET,
     NEW_REVIEW_REQUEST,
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
@@ -64,6 +64,47 @@ export const productReducer = (state = { products: [] }, action) => {
             return {
                 loading: false,
                 error: action.payload,
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+};
+
+export const productDeleteUpdateReducer = (state = {}, action) => {
+
+    switch (action.type) {
+        case DELETE_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+
+            }
+
+        case DELETE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload,
+            }
+
+        case DELETE_PRODUCT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+
+        case DELETE_PRODUCT_RESET:
+            return {
+                ...state,
+                isDeleted: false
             }
 
         case CLEAR_ERRORS:

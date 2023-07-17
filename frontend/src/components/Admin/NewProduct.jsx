@@ -43,14 +43,13 @@ function NewProduct() {
         "Attire",
         "Camera",
         "SmartPhones",
-        "mobile"
     ];
 
     useEffect(() => {
 
         if (error) {
             alert.error(error)
-            dispatch(clearErrors);
+            dispatch(clearErrors());
         }
 
         if (success) {
