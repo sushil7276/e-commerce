@@ -5,9 +5,20 @@ import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
+import { useSelector } from "react-redux";
 
 
 function Dashboard() {
+
+    let outOfStock = 0;
+
+    const { products } = useSelector((state) => state.products);
+
+    products && products.forEach((item) => {
+        if (item.stock === 0) {
+            outOfStock += 1;
+        }
+    });
 
 
     const lineState = {

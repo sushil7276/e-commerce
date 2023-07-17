@@ -30,9 +30,9 @@ exports.getAllProduct = catchAsyncError(async (req, res, next) => {
     const productCount = await Product.countDocuments();
 
     const apiFeature = new ApiFeatures(Product.find(), req.query)
-    .search()
-    .filter()
-    .pagination(resultPerPage);
+        .search()
+        .filter()
+        .pagination(resultPerPage);
 
     const products = await apiFeature.query;
 
@@ -42,8 +42,8 @@ exports.getAllProduct = catchAsyncError(async (req, res, next) => {
     //     .filter();
 
     // let products = await apiFeature.query;
-    
-//     //after search filter apply then count product
+
+    //     //after search filter apply then count product
     let filteredProductsCount = products.length;
     // apiFeature.pagination(resultPerPage);
 
@@ -58,6 +58,21 @@ exports.getAllProduct = catchAsyncError(async (req, res, next) => {
     });
 
 });
+
+
+// Get All Product (Admin)
+exports.getAdminProduct = catchAsyncError(async (req, res, next) => {
+
+    const products = await Product.find();
+
+
+    res.status(200).json({
+        success: true,
+        products,
+    });
+
+});
+
 
 // Get Product Details
 exports.getProductDetails = catchAsyncError(async (req, res, next) => {
@@ -230,5 +245,8 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
         success: true,
     });
 
-})
+});
+
+
+
 
