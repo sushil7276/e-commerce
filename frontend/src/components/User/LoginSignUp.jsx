@@ -91,7 +91,8 @@ function LoginSignUp() {
     // This code Use for React Router Dom V6
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const redirect = queryParams.get('/account') || '/shipping';
+    const redirect = queryParams.get('/shipping') || '/account';
+    // const redirect = queryParams.get('/account') || '/shipping';
 
 
     useEffect(() => {

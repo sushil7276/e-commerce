@@ -23,14 +23,14 @@ function NewProduct() {
     const alert = useAlert();
     const navigate = useNavigate();
 
-    const { loading, error, success } = useSelector((state) => state.newProduct)
+    const { loading, error, success } = useSelector((state) => state.newProduct);
 
     // State Declare
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
-    const [Stock, setStock] = useState(0);
+    const [stock, setStock] = useState(0);
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
 
@@ -70,7 +70,7 @@ function NewProduct() {
         myForm.set("price", price);
         myForm.set("description", description);
         myForm.set("category", category);
-        myForm.set("Stock", Stock);
+        myForm.set("stock", stock);
 
         images.forEach((img) => {
             myForm.append('images', img);
