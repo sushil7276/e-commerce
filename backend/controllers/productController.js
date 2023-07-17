@@ -120,26 +120,75 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 
 // Update Product ----> Admin
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
-    let product = await Product.findById(req.params.id)
-        .then(async (product) => {
-            // Update Query
-            product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-                new: true,
-                runValidators: true,
-                useFindAndModify: false
-            }).then((product) => {
-                res.status(200).json({
-                    success: true,
-                    product
-                })
-            })
+    // let product = await Product.findById(req.params.id)
+    //     .then(async (product) => {
+    //         // Update Query
+    //         product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    //             new: true,
+    //             runValidators: true,
+    //             useFindAndModify: false
+    //         }).then((product) => {
+    //             res.status(200).json({
+    //                 success: true,
+    //                 product
+    //             })
+    //         })
 
-        })
-        .catch(() => {
-            next(new ErrorHandler("Product not found", 404))
-        })
+    //     })
+    //     .catch(() => {
+    //         next(new ErrorHandler("Product not found", 404))
+    //     })
 
-})
+    let product = await Product.findById(req.params.id);
+
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
+    }
+
+    // Images Start here
+    let images = [];
+
+    if (typeof req.body.images === "string") {
+        // single image store
+        images.push(req.body.images);
+
+    } else {
+        // Multiple images store
+        images = req.body.images;
+    }
+
+    // If images is already there then Delete images from Cloudinary
+    if (images !== undefined) {
+        // Deleting Images From Cloudinary
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+        }
+
+        const imagesLinks = [];
+        for (let i = 0; i < product.images.length; i++) {
+            const result = await cloudinary.v2.uploader.upload(images[i], { folder: "products" });
+
+            imagesLinks.push({
+                public_id: result.public_id,
+                url: result.secure_url,
+            });
+        }
+
+        req.body.images = imagesLinks;
+    }
+
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+
+    res.status(200).json({
+        success: true,
+        product,
+    })
+
+});
 
 
 // Delete Product ----> Admin
@@ -178,7 +227,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
         message: "Product Deleted Successfully"
     });
 
-})
+});
 
 
 // Create New Review or Update the Review
