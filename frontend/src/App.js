@@ -31,6 +31,7 @@ import MyOrders from './components/Order/MyOrders';
 import OrderDetails from './components/Order/OrderDetails';
 import Dashboard from './components/Admin/Dashboard';
 import ProductList from './components/Admin/ProductList';
+import NewProduct from './components/Admin/NewProduct';
 
 
 
@@ -113,6 +114,7 @@ function App() {
           {/* Admin Route */}
           <Route path='/admin/dashboard' element={<ProtectedRoute><Dashboard isAdmin={true} /></ProtectedRoute>} />
           <Route path='/admin/products' element={<ProtectedRoute><ProductList isAdmin={true} /></ProtectedRoute>} />
+          <Route path='/admin/product' element={<ProtectedRoute><NewProduct isAdmin={true} /></ProtectedRoute>} />
 
         </Routes>
         <Footer />
