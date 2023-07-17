@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./SideBar";
 import "./dashboard.css";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdminProduct } from "../../actions/productAction";
 
 
 function Dashboard() {
+
+    const dispatch = useDispatch();
 
     let outOfStock = 0;
 
@@ -20,6 +23,10 @@ function Dashboard() {
         }
     });
 
+
+    useEffect(() => {
+        dispatch(getAdminProduct());
+    }, [dispatch])
 
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
@@ -39,7 +46,7 @@ function Dashboard() {
             {
                 backgroundColor: ["#00A6B4", "#6800B4"],
                 hoverBackgroundColor: ["#4B5000", "#35014F"],
-                data: [2, 10],
+                data: [outOfStock, products.length - outOfStock],
             },
         ],
     };
@@ -60,7 +67,7 @@ function Dashboard() {
                     <div className="dashboardSummaryBox2">
                         <Link to="/admin/product" >
                             <p>Product</p>
-                            <p>50</p>
+                            <p>{products && products.length}</p>
                         </Link>
 
                         <Link to="/admin/orders">
