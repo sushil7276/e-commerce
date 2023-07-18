@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import SideBar from "./SideBar";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,7 +17,6 @@ function ProcessOrder() {
     const dispatch = useDispatch();
     const alert = useAlert();
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const { order, error, loading } = useSelector((state) => state.orderDetails);
     const { error: updateError, isUpdated } = useSelector((state) => state.order);

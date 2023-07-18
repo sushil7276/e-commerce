@@ -99,7 +99,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`      
 
     // This url use in development build
-    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;  
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
 
     const message = `Your password reset token is temp:- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, Please ignore it`;
@@ -268,19 +268,14 @@ exports.getSingleUser = catchAsyncError(async (req, res, next) => {
 // Update User Profile (admin)
 exports.adminUpdateUserProfile = catchAsyncError(async (req, res, next) => {
 
-    const pass = await bcrypt.hash(req.body.password, 10)
-
-
     const newUser = {
         name: req.body.name,
         email: req.body.email,
         role: req.body.role,
-        password: pass
     }
 
-    // We will add later
 
-    const user = await User.findByIdAndUpdate(req.params.id, newUser, {
+    await User.findByIdAndUpdate(req.params.id, newUser, {
         new: true,
         runValidators: true,
         useFindAndModify: false,

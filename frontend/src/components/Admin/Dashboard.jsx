@@ -8,6 +8,7 @@ import Chart from 'chart.js/auto';
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction";
+import { getAllUsers } from "../../actions/userAction";
 
 
 function Dashboard() {
@@ -18,6 +19,7 @@ function Dashboard() {
 
     const { products } = useSelector((state) => state.products);
     const { orders } = useSelector((state) => state.allOrders)
+    const { users } = useSelector((state) => state.allUsers)
 
     products && products.forEach((item) => {
         if (item.stock === 0) {
@@ -29,6 +31,7 @@ function Dashboard() {
     useEffect(() => {
         dispatch(getAdminProduct());
         dispatch(getAllOrders());
+        dispatch(getAllUsers());
     }, [dispatch])
 
     const lineState = {
@@ -80,7 +83,7 @@ function Dashboard() {
 
                         <Link to="/admin/users" >
                             <p>Users</p>
-                            <p>2</p>
+                            <p>{users && users.length}</p>
                         </Link>
 
                     </div>

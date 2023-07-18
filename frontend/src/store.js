@@ -4,7 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension"
 import { productReducer, productDetailsReducer, newReviewReducer, newProductReducer, productDeleteUpdateReducer } from "./reducers/productReducer";
-import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
+import { allUsersReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
 import { allOrderReducer, myOrdersReducer, newOrderReducer, orderDeleteUpdateReducer, orderDetailsReducer } from "./reducers/orderReducer";
 
@@ -24,6 +24,8 @@ const reducer = combineReducers({
     product: productDeleteUpdateReducer,
     allOrders: allOrderReducer,
     order: orderDeleteUpdateReducer,
+    allUsers: allUsersReducer,
+    userDetails: userDetailsReducer,
 });
 
 let initialState = {
