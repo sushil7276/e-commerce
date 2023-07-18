@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from './components/layout/Header/Header';
 import WebFont from 'webfontloader';
 import { useEffect, useState } from 'react';
@@ -40,6 +40,7 @@ import UpdateUser from './components/Admin/UpdateUser';
 import ProductReviews from './components/Admin/ProductReviews';
 import Contact from './components/layout/Contact/Contact';
 import About from './components/layout/About/About';
+import NotFound from './components/layout/NotFound/NotFound';
 
 
 
@@ -79,6 +80,7 @@ function App() {
       <Router>
         <Header />
         {isAuthenticated && <UserOptions user={user} />}
+
         <Routes>
 
           {/* ---------------------------------------------------------------------------------------------- */}
@@ -114,7 +116,7 @@ function App() {
             <Route path='/process/payment' element={<ProtectedRoute><Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements></ProtectedRoute>} />
           )}
 
-          
+
           {/* After payment Order success Route */}
           <Route path='/success' element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
 
@@ -133,6 +135,10 @@ function App() {
           <Route path='/admin/users' element={<ProtectedRoute><UserList isAdmin={true} /></ProtectedRoute>} />
           <Route path='/admin/user/:id' element={<ProtectedRoute><UpdateUser isAdmin={true} /></ProtectedRoute>} />
           <Route path='/admin/reviews' element={<ProtectedRoute><ProductReviews isAdmin={true} /></ProtectedRoute>} />
+
+
+          <Route path="*" element={<NotFound />} />
+          {/* <Route element={window.location.pathname === "/process/payment" ? null : <NotFound />} /> */}
 
         </Routes>
         <Footer />
