@@ -113,6 +113,8 @@ function App() {
           {stripeApiKey && (
             <Route path='/process/payment' element={<ProtectedRoute><Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements></ProtectedRoute>} />
           )}
+
+          
           {/* After payment Order success Route */}
           <Route path='/success' element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
 
