@@ -1,5 +1,5 @@
 import './App.css';
-import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from './components/layout/Header/Header';
 import WebFont from 'webfontloader';
 import { useEffect, useState } from 'react';
@@ -72,6 +72,8 @@ function App() {
 
   }, []);
 
+  // inspect menu block
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
 
 
   return (
