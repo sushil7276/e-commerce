@@ -38,6 +38,8 @@ import ProcessOrder from './components/Admin/ProcessOrder';
 import UserList from './components/Admin/UserList';
 import UpdateUser from './components/Admin/UpdateUser';
 import ProductReviews from './components/Admin/ProductReviews';
+import Contact from './components/layout/Contact/Contact';
+import About from './components/layout/About/About';
 
 
 
@@ -82,6 +84,8 @@ function App() {
           {/* ---------------------------------------------------------------------------------------------- */}
           {/* Public Access Route */}
           <Route path='/' exact element={<Home />} />
+          <Route path='/contact' exact element={<Contact />} />
+          <Route path='/about' exact element={<About />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/products' element={<Product />} />
           <Route path='/products/:keyword' element={<Product />} />
