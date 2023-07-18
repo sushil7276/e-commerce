@@ -15,11 +15,13 @@ function Dashboard() {
 
     const dispatch = useDispatch();
 
-    let outOfStock = 0;
-
     const { products } = useSelector((state) => state.products);
     const { orders } = useSelector((state) => state.allOrders)
     const { users } = useSelector((state) => state.allUsers)
+
+
+    // Total out of stock items
+    let outOfStock = 0;
 
     products && products.forEach((item) => {
         if (item.stock === 0) {
@@ -32,7 +34,15 @@ function Dashboard() {
         dispatch(getAdminProduct());
         dispatch(getAllOrders());
         dispatch(getAllUsers());
-    }, [dispatch])
+    }, [dispatch]);
+
+
+    // Total orders price
+    let totalAmount = 0
+
+    orders && orders.forEach(item => {
+        totalAmount += item.totalPrice;
+    })
 
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
@@ -41,7 +51,7 @@ function Dashboard() {
                 label: "TOTAL AMOUNT",
                 backgroundColor: ["tomato"],
                 hoverBackgroundColor: ["rgb(197, 72, 49)"],
-                data: [0, 4000],
+                data: [0, totalAmount],
             },
         ],
     };
@@ -67,7 +77,7 @@ function Dashboard() {
                 <div className="dashboardSummary">
                     <div>
                         <p>
-                            Total Amount <br /> ₹ 2000
+                            Total Amount <br /> ₹ {totalAmount}
                         </p>
                     </div>
                     <div className="dashboardSummaryBox2">
