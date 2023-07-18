@@ -316,6 +316,7 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
 
     let ratings = 0;
 
+    // if reviews is 0 then show error that's why use this condition
     if (reviews.length === 0) {
         ratings = 0;
     } else {
