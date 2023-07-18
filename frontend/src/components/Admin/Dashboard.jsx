@@ -5,11 +5,13 @@ import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
+import { CategoryScale } from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction";
 import { getAllUsers } from "../../actions/userAction";
 
+Chart.register(CategoryScale);
 
 function Dashboard() {
 
@@ -34,6 +36,7 @@ function Dashboard() {
         dispatch(getAdminProduct());
         dispatch(getAllOrders());
         dispatch(getAllUsers());
+        // eslint-disable-next-line
     }, [dispatch]);
 
 

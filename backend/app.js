@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const cors = require('cors');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const path = require("path");
 
 const errorMiddleware = require("./middleware/error");
 
@@ -27,6 +28,15 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
+
+// Backend run react build file
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+// backend return one file (single page application)
+app.get("*", (req, res) => {
+    // react return component
+    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+})
 
 // Middleware for Error
 app.use(errorMiddleware);
