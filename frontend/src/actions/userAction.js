@@ -1,3 +1,4 @@
+import { Cookies } from "react-cookie";
 import {
     LOGIN_REQUEST,
     LOGIN_FAIL,
@@ -38,7 +39,7 @@ import {
 } from "../constant/userConstant";
 import axios from "axios";
 
-
+const cookies = new Cookies();
 
 // Login
 export const login = (email, password) => async (dispatch) => {
@@ -52,6 +53,9 @@ export const login = (email, password) => async (dispatch) => {
             { email, password },
             config
         );
+
+
+        cookies.set('userId', data.user._id)
 
         dispatch({ type: LOGIN_SUCCESS, payload: data.user });
     } catch (error) {
@@ -81,6 +85,7 @@ export const loadUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOAD_USER_REQUEST });
 
+        // debugger
         const { data } = await axios.get(`/api/v1/me`);
 
         dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
@@ -95,6 +100,9 @@ export const logout = () => async (dispatch) => {
         await axios.get(`/api/v1/logout`);
 
         dispatch({ type: LOGOUT_SUCCESS });
+
+        cookies.remove('userId');
+
     } catch (error) {
         dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
     }

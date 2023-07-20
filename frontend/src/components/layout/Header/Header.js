@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo.png";
-import { MdAccountCircle } from "react-icons/md";
+// import { MdAccountCircle } from "react-icons/md";
 import { MdSearch } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 
@@ -29,10 +29,10 @@ const options = {
   nav4justifyContent: "flex-start",
   link1ColorHover: "#eb4034",
   link1Margin: "1vmax",
-  profileIcon: true,
-  ProfileIconElement: MdAccountCircle,
-  profileIconURL: "/login",
-  profileIconColor: "rgba(35, 35, 35,0.8)",
+  // profileIcon: true,
+  // ProfileIconElement: MdAccountCircle,
+  // profileIconURL: "/login",
+  // profileIconColor: "rgba(35, 35, 35,0.8)",
   searchIcon: true,
   SearchIconElement: MdSearch,
   searchIconColor: "rgba(35, 35, 35,0.8)",
