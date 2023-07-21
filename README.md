@@ -38,6 +38,9 @@ _fill each filed with your info respectively_
 id = s@gmail.com
 pass = 123
 
+**Use stripe card to Test Payment**
+link :- "https://stripe.com/docs/testing"
+
 This content edit by "https://stackedit.io/app" website.
 
 
