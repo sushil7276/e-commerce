@@ -79,7 +79,7 @@ function App() {
   }, [uId, user]);
 
   // inspect menu block
-  // window.addEventListener("contextmenu", (e) => e.preventDefault());
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
 
 
   return (
