@@ -7,7 +7,7 @@ const connectDatabase = () => {
             console.log(`Mongodb connected : ${data.connection.host}`)
         })
         .catch((error) => console.log(error.message))
-    mongoose.set('useFindAndModify', false)
+    // mongoose.set('useFindAndModify', false)
 }
 
 module.exports = connectDatabase;
