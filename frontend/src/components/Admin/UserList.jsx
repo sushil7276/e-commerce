@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./ProductList.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
@@ -12,11 +12,10 @@ import SideBar from "./SideBar";
 import { clearErrors, deleteUser, getAllUsers } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constant/userConstant";
 
-function UserList() {
+function UserList({history}) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const navigate = useNavigate();
 
     const { error, users } = useSelector((state) => state.allUsers);
     const { error: deleteError, isDeleted, message, } = useSelector((state) => state.profile)
@@ -39,13 +38,13 @@ function UserList() {
 
         if (isDeleted) {
             alert.success(message);
-            navigate("/admin/users");
+            history.push("/admin/users");
             dispatch({ type: DELETE_USER_RESET });
         }
 
 
         dispatch(getAllUsers());
-    }, [dispatch, error, alert, deleteError, isDeleted, message, navigate])
+    }, [dispatch, error, alert, deleteError, isDeleted, message, history])
 
 
 

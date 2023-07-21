@@ -6,17 +6,17 @@ import PersonIcon from '@material-ui/icons/Person'
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import ListAltIcon from "@material-ui/icons/ListAlt"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { logout } from '../../../actions/userAction'
 import Backdrop from '@material-ui/core/Backdrop'
+import { useHistory } from "react-router-dom";
 
 
 
 function UserOptions({ user }) {
 
-    let navigate = useNavigate();
+    let history = useHistory();
     const dispatch = useDispatch();
     const alert = useAlert()
 
@@ -46,20 +46,20 @@ function UserOptions({ user }) {
     }
 
     function cart() {
-        navigate("/cart");
+        history.push("/cart");
     }
 
 
     function dashboard() {
-        navigate("/admin/dashboard");
+        history.push("/admin/dashboard");
     }
 
     function orders() {
-        navigate("/orders");
+        history.push("/orders");
     }
 
     function account() {
-        navigate("/account");
+        history.push("/account");
     }
 
     function logoutUser() {

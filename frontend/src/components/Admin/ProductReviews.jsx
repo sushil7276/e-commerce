@@ -8,16 +8,14 @@ import MetaData from "../layout/MetaData";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Star from "@material-ui/icons/Star";
 import SideBar from "./SideBar";
-import { useNavigate } from "react-router-dom";
 import { clearErrors, deleteReviews, getAllReviews } from "../../actions/productAction";
 import { DELETE_REVIEW_RESET } from "../../constant/productConstant";
 
 
-function ProductReviews() {
+function ProductReviews({history}) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const navigate = useNavigate();
 
     const { error: deleteError, isDeleted } = useSelector((state) => state.review);
     const { error, reviews, loading } = useSelector((state) => state.productReviews);
@@ -49,10 +47,10 @@ function ProductReviews() {
 
         if (isDeleted) {
             alert.success("Review Deleted Successfully");
-            navigate("/admin/reviews");
+            history.push("/admin/reviews");
             dispatch({ type: DELETE_REVIEW_RESET });
         }
-    }, [dispatch, alert, error, deleteError, navigate, isDeleted, productId]);
+    }, [dispatch, alert, error, deleteError, history, isDeleted, productId]);
 
 
 

@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import "./UpdateProfile.css";
 import Loader from '../layout/Loader/Loader';
-import { useNavigate } from 'react-router-dom';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import FaceIcon from '@material-ui/icons/Face';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,11 +10,10 @@ import { UPDATE_PROFILE_RESET } from '../../constant/userConstant';
 import MetaData from '../layout/MetaData';
 
 
-function UpdateProfile() {
+function UpdateProfile({history}) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    let navigate = useNavigate();
 
     const { user } = useSelector((state) => state.user);
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -72,7 +70,7 @@ function UpdateProfile() {
 
             // new user reflected in redux store and UI
             dispatch(loadUser());
-            navigate("/account");
+            history.push("/account");
 
             dispatch({
                 type: UPDATE_PROFILE_RESET
@@ -85,7 +83,7 @@ function UpdateProfile() {
         }
 
 
-    }, [dispatch, error, alert, navigate, isUpdated, user]);
+    }, [dispatch, error, alert, history, isUpdated, user]);
 
     return (
         <Fragment>

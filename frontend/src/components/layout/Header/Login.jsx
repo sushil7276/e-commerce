@@ -1,13 +1,13 @@
 import React from 'react';
 import "./Header.css";
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import InfoIcon from '@mui/icons-material/Info';
 import LoginIcon from '@mui/icons-material/Login';
 import ContactsIcon from '@mui/icons-material/Contacts';
 
 function Login() {
-    const navigate = useNavigate();
+    const history  = useHistory();
 
     const options = [
         { icon: <ContactsIcon />, name: "Contact", func: contact },
@@ -17,15 +17,15 @@ function Login() {
 
 
     function contact() {
-        navigate("/contact");
+        history.push("/contact");
     }
 
     function about() {
-        navigate("/about");
+        history.push("/about");
     }
 
     function loginPage() {
-        navigate("/login");
+        history.push("/login");
     }
 
 

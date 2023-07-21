@@ -6,17 +6,16 @@ import MetaData from "../layout/MetaData";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import PersonIcon from "@material-ui/icons/Person";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SideBar from "./SideBar";
 import Loader from "../layout/Loader/Loader";
 import { clearErrors, getUserDetails, updateUser } from "../../actions/userAction";
 import { UPDATE_USER_RESET } from "../../constant/userConstant";
 
-function UpdateUser() {
+function UpdateUser({history}) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const navigate = useNavigate();
     const { id } = useParams();
 
     const { loading, error, user } = useSelector((state) => state.userDetails);
@@ -50,11 +49,11 @@ function UpdateUser() {
 
         if (isUpdated) {
             alert.success("User Updated Successfully");
-            navigate("/admin/users");
+            history.push("/admin/users");
             dispatch({ type: UPDATE_USER_RESET });
         }
 
-    }, [dispatch, alert, error, isUpdated, navigate, updateError, user, userId]);
+    }, [dispatch, alert, error, isUpdated, history, updateError, user, userId]);
 
 
     const updateUserSubmitHandler = (e) => {

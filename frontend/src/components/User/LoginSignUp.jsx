@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import "./LoginSignUp.css";
 import Loader from '../layout/Loader/Loader';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import FaceIcon from '@material-ui/icons/Face';
@@ -10,11 +10,10 @@ import { useAlert } from 'react-alert';
 import { clearErrors, login, register } from '../../actions/userAction';
 
 
-function LoginSignUp() {
+function LoginSignUp({ history, location }) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    let navigate = useNavigate();
 
     const { error, loading, isAuthenticated } = useSelector((state) => state.user);
 
@@ -85,15 +84,16 @@ function LoginSignUp() {
         }
     }
 
-    const location = useLocation();
-    
+   
+
     // This code Use for React Router Dom V5
-    // const redirect = location.search ? location.search.split("=")[1] : "/account";
+    const redirect = location.search ? location.search.split("=")[1] : "/account";
 
     // This code Use for React Router Dom V6
-    const queryParams = new URLSearchParams(location.search);
+    // const location = useLocation();
+    // const queryParams = new URLSearchParams(location.search);
     // const redirect = queryParams.get('/shipping') || '/account';
-    const redirect = queryParams.get('/account') || '/shipping';
+    // const redirect = queryParams.get('/account') || '/shipping';
 
 
     useEffect(() => {
@@ -105,11 +105,11 @@ function LoginSignUp() {
 
 
         if (isAuthenticated) {
-            navigate(redirect);
+            history.push(redirect);
         }
 
 
-    }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
+    }, [dispatch, error, alert, history, isAuthenticated, redirect]);
 
 
 

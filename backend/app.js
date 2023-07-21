@@ -12,7 +12,12 @@ const errorMiddleware = require("./middleware/error");
 // config
 dotenv.config({ path: "backend/config/config.env" });
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,7 +38,7 @@ app.use("/api/v1", payment);
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 // backend return one file (single page application)
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
     // react return component
     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 })

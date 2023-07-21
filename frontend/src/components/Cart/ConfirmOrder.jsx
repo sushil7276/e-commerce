@@ -3,12 +3,10 @@ import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import "./ConfirmOrder.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 
-function ConfirmOrder() {
-
-    const navigate = useNavigate();
+function ConfirmOrder({history}) {
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
@@ -36,7 +34,7 @@ function ConfirmOrder() {
         }
 
         sessionStorage.setItem("orderInfo", JSON.stringify(data));
-        navigate("/process/payment");
+        history.push("/process/payment");
 
     }
 

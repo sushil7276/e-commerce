@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./ProductList.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
@@ -16,11 +16,10 @@ import {
 } from "../../actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../constant/orderConstant";
 
-function OrderList() {
+function OrderList({history}) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const navigate = useNavigate();
 
     const { error, orders } = useSelector((state) => state.allOrders);
 
@@ -45,12 +44,12 @@ function OrderList() {
 
         if (isDeleted) {
             alert.success("Order Deleted Successfully");
-            navigate("/admin/orders");
+            history.push("/admin/orders");
             dispatch({ type: DELETE_ORDER_RESET });
         }
 
         dispatch(getAllOrders());
-    }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
+    }, [dispatch, alert, error, deleteError, history, isDeleted]);
 
 
     const columns = [

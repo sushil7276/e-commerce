@@ -4,20 +4,18 @@ import LockIcon from '@material-ui/icons/Lock';
 import React, { Fragment, useEffect, useState } from 'react';
 import "./UpdatePassword.css";
 import Loader from '../layout/Loader/Loader';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { clearErrors, updatePassword } from '../../actions/userAction';
 import { UPDATE_PASSWORD_RESET } from '../../constant/userConstant';
 import MetaData from '../layout/MetaData';
 
-function UpdatePassword() {
+function UpdatePassword({history}) {
 
     const dispatch = useDispatch();
     const alert = useAlert();
 
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
-    const navigate = useNavigate();
 
     // Password State
     const [oldPassword, setOldPassword] = useState("");
@@ -47,14 +45,14 @@ function UpdatePassword() {
         if (isUpdated) {
             alert.success("Profile Updated Successfully");
 
-            navigate("/account");
+            history.push("/account");
 
             dispatch({
                 type: UPDATE_PASSWORD_RESET,
             });
         }
 
-    }, [dispatch, error, alert, navigate, isUpdated])
+    }, [dispatch, error, alert, history, isUpdated])
 
     return (
         <Fragment>

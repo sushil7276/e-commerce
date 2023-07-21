@@ -1,6 +1,6 @@
 import { combineReducers, applyMiddleware } from "redux";
-// import { createStore } from "redux";
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore } from "redux";
+// import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension"
 import { productReducer, productDetailsReducer, newReviewReducer, newProductReducer, productDeleteUpdateReducer, productReviewsReducer, reviewReducer } from "./reducers/productReducer";
@@ -40,13 +40,13 @@ let initialState = {
 
 const middleware = [thunk];
 
-// const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
-const store = configureStore({
-    reducer,
-    preloadedState: initialState,
-    middleware: [...middleware],
-    devTools: composeWithDevTools(applyMiddleware(...middleware)),
-});
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+// const store = configureStore({
+//     reducer,
+//     preloadedState: initialState,
+//     middleware: [...middleware],
+//     devTools: composeWithDevTools(applyMiddleware(...middleware)),
+// });
 
 export default store;
 
