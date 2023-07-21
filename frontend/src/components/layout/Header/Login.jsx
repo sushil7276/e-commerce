@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react'
 import "./Header.css";
 import { SpeedDial, SpeedDialAction } from '@material-ui/lab';
 import { useHistory } from "react-router-dom";
-import InfoIcon from '@mui/icons-material/Info';
 import LoginIcon from '@mui/icons-material/Login';
-import ContactsIcon from '@mui/icons-material/Contacts';
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useSelector } from 'react-redux'
+
 
 function Login() {
-    const history  = useHistory();
+    const history = useHistory();
+
+    const [open, setOpen] = useState(false);
+
+    const { cartItems } = useSelector((state) => state.cart)
 
     const options = [
-        { icon: <ContactsIcon />, name: "Contact", func: contact },
-        { icon: <InfoIcon />, name: "About", func: about },
+        {
+            icon: <ShoppingCartIcon style={{ color: cartItems.length > 0 ? "tomato" : "unset" }} />,
+
+            name: `Cart(${cartItems.length})`,
+            func: cart
+        },
         { icon: <LoginIcon />, name: "Login", func: loginPage },
     ];
 
 
-    function contact() {
-        history.push("/contact");
-    }
-
-    function about() {
-        history.push("/about");
+    function cart() {
+        history.push("/cart");
     }
 
     function loginPage() {
@@ -34,7 +39,9 @@ function Login() {
             <SpeedDial
                 ariaLabel='SpeedDial tooltip example'
                 direction='down'
-                open
+                onClose={() => setOpen(false)}
+                onOpen={() => setOpen(true)}
+                open={open}
                 className='speedDial'
                 style={{ zIndex: "11" }}
                 icon={
