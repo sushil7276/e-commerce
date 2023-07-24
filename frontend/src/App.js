@@ -41,6 +41,8 @@ import ProductReviews from './components/Admin/ProductReviews';
 import Contact from './components/layout/Contact/Contact';
 import About from './components/layout/About/About';
 import NotFound from './components/layout/NotFound/NotFound';
+import Login from './components/layout/Header/Login';
+
 
 
 function App() {
@@ -77,7 +79,7 @@ function App() {
   }, []);
 
   // inspect menu block
-  // window.addEventListener("contextmenu", (e) => e.preventDefault());
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
 
 
   return (
@@ -85,7 +87,7 @@ function App() {
 
       <Router>
         <Header />
-        {isAuthenticated && <UserOptions user={user} />}
+        {isAuthenticated && user ? <UserOptions user={user} /> : <Login />}
 
         {stripeApiKey && (
           <Elements stripe={loadStripe(stripeApiKey)}>
