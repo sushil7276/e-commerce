@@ -45,7 +45,10 @@ import { Cookies } from 'react-cookie'
 import Login from './components/layout/Header/Login';
 
 
+
 function App() {
+
+
 
   const { isAuthenticated, user } = useSelector(state => state.user)
 
@@ -73,8 +76,9 @@ function App() {
       store.dispatch(loadUser());
 
     }
-    // Get Stripe Api Key
-    getStripeApiKey();
+    
+      // Get Stripe Api Key
+      getStripeApiKey();
 
   }, [uId, user]);
 
