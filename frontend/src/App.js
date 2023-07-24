@@ -41,9 +41,6 @@ import ProductReviews from './components/Admin/ProductReviews';
 import Contact from './components/layout/Contact/Contact';
 import About from './components/layout/About/About';
 import NotFound from './components/layout/NotFound/NotFound';
-import { Cookies } from 'react-cookie'
-import Login from './components/layout/Header/Login';
-
 
 
 function App() {
@@ -60,9 +57,6 @@ function App() {
     setStripeApiKey(data.stripeApiKey)
   }
 
-  const cookies = new Cookies();
-
-  const uId = cookies.get('userId');
 
   useEffect(() => {
     WebFont.load({
@@ -71,19 +65,19 @@ function App() {
       }
     });
 
-    if (user && user._id !== uId) {
-      // login user details store
-      store.dispatch(loadUser());
 
-    }
-    
-      // Get Stripe Api Key
-      getStripeApiKey();
+    // login user details store
+    store.dispatch(loadUser());
 
-  }, [uId, user]);
+
+
+    // Get Stripe Api Key
+    getStripeApiKey();
+
+  }, []);
 
   // inspect menu block
-  window.addEventListener("contextmenu", (e) => e.preventDefault());
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
 
 
   return (
@@ -91,7 +85,7 @@ function App() {
 
       <Router>
         <Header />
-        {isAuthenticated && user ? <UserOptions user={user} /> : <Login />}
+        {isAuthenticated && <UserOptions user={user} />}
 
         {stripeApiKey && (
           <Elements stripe={loadStripe(stripeApiKey)}>
