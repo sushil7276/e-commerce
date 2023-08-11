@@ -23,7 +23,7 @@ function About() {
                     <div>
                         <Avatar
                             style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-                            src="https://res.cloudinary.com/dw8z8ud3z/image/upload/v1690377064/1673263815827_uurasw.jpg"
+                            src="https://res.cloudinary.com/dw8z8ud3z/image/upload/v1690881261/s6_ehbuit.jpg"
                             alt="Founder"
                         />
                         <Typography>Sushil Babar</Typography>
