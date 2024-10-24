@@ -289,15 +289,21 @@ exports.adminUpdateUserProfile = catchAsyncError(async (req, res, next) => {
 // Delete User Profile (admin)
 exports.adminDeleteUserProfile = catchAsyncError(async (req, res, next) => {
 
-    const user = await User.findByIdAndDelete(req.params.id);
+    // const user = await User.findByIdAndDelete(req.params.id);
 
-    if (!user) {
-        return next(new ErrorHandler(`User does not exist with id ${req.params.id}`))
-    }
+    // if (!user) {
+    //     return next(new ErrorHandler(`User does not exist with id ${req.params.id}`))
+    // }
 
-    res.status(200).json({
+    // res.status(200).json({
+    //     success: true,
+    //     message: "Deleted Successfully"
+    // })
+
+    // currently I am not deleting any user
+     res.status(200).json({
         success: true,
-        message: "Deleted Successfully"
+        message: "currently I am not deleting any user"
     })
 })
 
