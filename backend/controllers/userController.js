@@ -303,7 +303,7 @@ exports.adminDeleteUserProfile = catchAsyncError(async (req, res, next) => {
     // currently I am not deleting any user
      res.status(200).json({
         success: true,
-        message: "currently I am not deleting any user"
+        message: "Currently I am not deleting any user"
     })
 })
 
